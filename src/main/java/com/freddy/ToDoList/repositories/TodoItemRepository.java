@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
 
-public interface TodoItemRepository extends CrudRepository<Long, TodoItemModel> {
+public interface TodoItemRepository extends CrudRepository<TodoItemModel, Long> {
 
 
 }

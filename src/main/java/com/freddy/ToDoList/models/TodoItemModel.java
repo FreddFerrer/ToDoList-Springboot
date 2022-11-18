@@ -13,7 +13,10 @@ import java.sql.Date;
 public class TodoItemModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
+    @Column(unique = true, nullable = false)
     private Long id;
 
     @Getter
@@ -27,9 +30,9 @@ public class TodoItemModel {
 
     @Getter
     @Setter
-    private Date createdDate;
+    private Date created_date;
 
     @Getter
     @Setter
-    private Date modifiedDate;
+    private Date modified_date;
 }
