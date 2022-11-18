@@ -10,10 +10,10 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "todo_item")
-public class TodoItem {
+public class TodoItemModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Getter
