@@ -2,10 +2,51 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+    <title>ToDo List</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
 
+<div class="container">
+    <h1 class="text-center">ToDo Lista</h1>
+    <br>
+    //DIA
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Actions</th>
+            <th scope="col">Id</th>
+            <th scope="col">Complete</th>
+            <th scope="col">Create date</th>
+            <th scope="col">Modified date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
