@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
+import java.time.Instant;
 
 @Entity
 @Table(name = "todo_item")
@@ -30,9 +31,27 @@ public class TodoItemModel {
 
     @Getter
     @Setter
-    private Date created_date;
+    private Instant created_date;
 
     @Getter
     @Setter
-    private Date modified_date;
+    private Instant modified_date;
+
+    public TodoItemModel(String description, Boolean completed, Instant created_date, Instant modified_date) {
+        this.description = description;
+        this.completed = completed;
+        this.created_date = created_date;
+        this.modified_date = modified_date;
+    }
+
+    @Override
+    public String toString() {
+        return "TodoItemModel{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", completed=" + completed +
+                ", created_date=" + created_date +
+                ", modified_date=" + modified_date +
+                '}';
+    }
 }
