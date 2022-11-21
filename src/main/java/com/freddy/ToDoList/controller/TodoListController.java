@@ -9,11 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/todoitems")
 public class TodoListController {
 
     private final Logger logger = LoggerFactory.getLogger(TodoListController.class);
@@ -25,6 +26,8 @@ public class TodoListController {
     public ModelAndView index(){
         logger.info("request to GET index");
         ModelAndView model = new ModelAndView("index");
+        model.addObject("todoItems", todoItemRepository.findAll());
+        model.addObject("today", Instant.now().atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek());
         return model;
     }
 

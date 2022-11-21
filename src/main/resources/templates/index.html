@@ -3,50 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>ToDo List</title>
-    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
 
 <div class="container">
     <h1 class="text-center">ToDo Lista</h1>
     <br>
-    <!--DIA-->
-    <table class="table">
+    <p class="text-center" th:text="|Happy ${today}|"></p>
+    <table class="table table-bordered table-striped">
         <thead>
         <tr>
             <th scope="col">Actions</th>
             <th scope="col">Id</th>
-            <th scope="col">Complete</th>
+            <th scope="col">Description</th>
+            <th scope="col">Completed</th>
             <th scope="col">Create date</th>
             <th scope="col">Modified date</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
+        <tr th:each="item:${todoItems}" th:class="${item.completed} ? success : warning">
+            <td>
+                <div class="btn btn-group-sm" role="group">
+                    <a class="btn btn-info" th:href="@{/edit/{id}(id=${item.id})}">Edit</a>
+                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${item.id})}">Delete</a>
+                </div>
+            </td>
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.description}"></td>
+            <td th:text="${item.completed}"></td>
+            <td th:text="${item.created_date}"></td>
+            <td th:text="${item.modified_date}"></td>
         </tr>
         </tbody>
     </table>
+    <p><a class="btn btn-success" href="/create-todo">Add a Todo!</a></p>
 
 
 </div>
 
 
-<script th:src="@{/js/popper.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>

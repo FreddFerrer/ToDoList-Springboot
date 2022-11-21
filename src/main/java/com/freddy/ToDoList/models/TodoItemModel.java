@@ -37,11 +37,14 @@ public class TodoItemModel {
     @Setter
     private Instant modified_date;
 
-    public TodoItemModel(String description, Boolean completed, Instant created_date, Instant modified_date) {
+    public TodoItemModel() {
+    }
+
+    public TodoItemModel(String description) {
         this.description = description;
-        this.completed = completed;
-        this.created_date = created_date;
-        this.modified_date = modified_date;
+        this.completed = false;
+        this.created_date = Instant.now();
+        this.modified_date = Instant.now();
     }
 
     @Override
