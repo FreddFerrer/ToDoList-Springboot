@@ -6,13 +6,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.time.Instant;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Optional;
+
 
 @Controller
 public class TodoListController {
@@ -30,6 +32,22 @@ public class TodoListController {
         model.addObject("today", Instant.now().atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek());
         return model;
     }
+
+    @PostMapping("/todo/{id}")
+    public String actualizarLista(@PathVariable("id") Long id,
+                                  @Valid TodoItemModel todoItem, BindingResult result,
+                                  Model model){
+        if(result.hasErrors()){
+            todoItem.setId(id);
+            return "update-todo-item";
+        }
+
+        todoItem.setModified_date(Instant.now());
+        todoItemRepository.save(todoItem);
+        return "redirect:/";
+    }
+
+
 
 
 }
