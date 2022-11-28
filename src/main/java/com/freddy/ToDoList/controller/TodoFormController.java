@@ -16,9 +16,13 @@ public class TodoFormController {
     private TodoItemRepository todoItemRepository;
 
 
+    @GetMapping("/create-todo")
+    public String mostrarAddTodo(TodoItemModel todoItem){
+        return "add-todo-item";
+    }
 
     @GetMapping("/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") long id, Model model) {
+    public String mostrarUpdateForm(@PathVariable("id") long id, Model model) {
         TodoItemModel todoItem = todoItemRepository
                 .findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("TodoItem id: " + id + " not found"));
@@ -26,4 +30,16 @@ public class TodoFormController {
         model.addAttribute("todo", todoItem);
         return "update-todo-item";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteItem(@PathVariable("id") Long id, Model model){
+        TodoItemModel todoItem = todoItemRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("id " + id + " not exist"));
+
+        todoItemRepository.delete(todoItem);
+        return "redirect:/";
+    }
+
+
 }
