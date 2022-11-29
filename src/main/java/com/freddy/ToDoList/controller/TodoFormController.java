@@ -17,7 +17,8 @@ public class TodoFormController {
 
 
     @GetMapping("/create-todo")
-    public String showCreateForm(TodoItemModel todoItem){
+    public String showCreateForm(TodoItemModel todoItem, Model model){
+        model.addAttribute("todoItem", todoItem);
         return "add-todo-item";
     }
 
