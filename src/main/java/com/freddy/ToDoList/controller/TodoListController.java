@@ -42,7 +42,6 @@ public class TodoListController {
         todoItem.setCreated_date(Instant.now());
         todoItem.setModified_date(Instant.now());
         todoItemRepository.save(todoItem);
-        model.addAttribute("todoItem", todoItem);
         return "redirect:/";
     }
 
