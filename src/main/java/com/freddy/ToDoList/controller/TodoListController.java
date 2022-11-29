@@ -34,7 +34,7 @@ public class TodoListController {
     }
 
     @PostMapping("/todo")
-    public String createTodoItem(@Valid TodoItemModel todoItem, BindingResult result, Model model) {
+    public String createTodoItem(@Valid @ModelAttribute TodoItemModel todoItem, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-todo-item";
         }
@@ -42,13 +42,12 @@ public class TodoListController {
         todoItem.setCreated_date(Instant.now());
         todoItem.setModified_date(Instant.now());
         todoItemRepository.save(todoItem);
+        model.addAttribute("todoItem", todoItem);
         return "redirect:/";
     }
 
-
-
     @PostMapping("/todo/{id}")
-    public String actualizarLista(@PathVariable("id") Long id,
+    public String actualizarLista(@PathVariable("id") long id,
                                   @Valid TodoItemModel todoItem, BindingResult result,
                                   Model model){
         if(result.hasErrors()){
