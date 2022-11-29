@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:field="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>ToDo List</title>
@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <div class="col-md-6">
-        <h1>Agregar nueva tarea</h1>
+        <h1>Add a new Todo Item</h1>
         <form action="#" th:action="@{/todo}" th:object="${todoItem}" method="POST">
             <div class="form-group">
                 <label for="description">Description</label>

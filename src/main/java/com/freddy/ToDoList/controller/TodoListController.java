@@ -1,5 +1,10 @@
 package com.freddy.ToDoList.controller;
 
+import java.time.Instant;
+import java.time.ZoneId;
+
+import javax.validation.Valid;
+
 import com.freddy.ToDoList.models.TodoItemModel;
 import com.freddy.ToDoList.repositories.TodoItemRepository;
 import org.slf4j.Logger;
@@ -8,33 +13,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.validation.Valid;
-import java.time.Instant;
-import java.time.ZoneId;
-
 
 @Controller
 public class TodoListController {
-
     private final Logger logger = LoggerFactory.getLogger(TodoListController.class);
 
     @Autowired
     private TodoItemRepository todoItemRepository;
 
     @GetMapping("/")
-    public ModelAndView index(){
+    public ModelAndView index() {
         logger.info("request to GET index");
-        ModelAndView model = new ModelAndView("index");
-        model.addObject("todoItems", todoItemRepository.findAll());
-        model.addObject("today", Instant.now().atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek());
-        return model;
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("todoItems", todoItemRepository.findAll());
+        modelAndView.addObject("today", Instant.now().atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek());
+        return modelAndView;
     }
 
     @PostMapping("/todo")
-    public String createTodoItem(@Valid @ModelAttribute TodoItemModel todoItem, BindingResult result, Model model) {
+    public String createTodoItem(@Valid TodoItemModel todoItem, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-todo-item";
         }
@@ -46,10 +47,8 @@ public class TodoListController {
     }
 
     @PostMapping("/todo/{id}")
-    public String actualizarLista(@PathVariable("id") long id,
-                                  @Valid TodoItemModel todoItem, BindingResult result,
-                                  Model model){
-        if(result.hasErrors()){
+    public String updateTodoItem(@PathVariable("id") long id, @Valid TodoItemModel todoItem, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             todoItem.setId(id);
             return "update-todo-item";
         }
@@ -58,8 +57,5 @@ public class TodoListController {
         todoItemRepository.save(todoItem);
         return "redirect:/";
     }
-
-
-
 
 }
