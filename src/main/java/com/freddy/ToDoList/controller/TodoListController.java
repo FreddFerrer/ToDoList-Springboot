@@ -36,10 +36,10 @@ public class TodoListController {
     }
 
     @PostMapping("/todo")
-    public String createTodoItem(@Valid @ModelAttribute TodoItemModel todoItem, BindingResult result, Model model) {
-        model.addAttribute("todoItem", todoItem);
-        if (result.hasErrors()) {
+    public String createTodoItem(@ModelAttribute @Valid TodoItemModel todoItem, BindingResult result, Model model) {
 
+        if (result.hasErrors()) {
+            model.addAttribute("todoItem", todoItem);
             return "add-todo-item";
         }
 
