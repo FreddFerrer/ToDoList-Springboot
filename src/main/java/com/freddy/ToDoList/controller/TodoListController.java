@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,9 +36,10 @@ public class TodoListController {
     }
 
     @PostMapping("/todo")
-    public String createTodoItem(@Valid TodoItemModel todoItem, BindingResult result, Model model) {
+    public String createTodoItem(@Valid @ModelAttribute TodoItemModel todoItem, BindingResult result, Model model) {
+        model.addAttribute("todoItem", todoItem);
         if (result.hasErrors()) {
-            model.addAttribute("todoItem", todoItem);
+
             return "add-todo-item";
         }
 

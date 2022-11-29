@@ -15,8 +15,8 @@
                 <label for="description">Description</label>
                 <input class="form-control" type="text" th:field="*{description}" id="description"
                        placeholder="Description">
-                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
             </div>
+            <div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
 
             <button type="submit" class="btn btn-success">Add Todo!</button>
         </form>
